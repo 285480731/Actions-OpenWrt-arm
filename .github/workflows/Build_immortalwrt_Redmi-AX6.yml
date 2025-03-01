@@ -213,7 +213,7 @@ jobs:
         keep_minimum_runs: 10
 
     - name: 删除旧的发布版本
-      uses: dev-drprasad/delete-older-releases@v0.2.2  # 替换为可靠替代品 <button class="citation-flag" data-index="10">
+      uses: dev-drprasad/delete-older-releases@main  # 替换为 main 分支 <button class="citation-flag" data-index="10">
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 10
@@ -221,7 +221,6 @@ jobs:
         tag_pattern: Redmi-AX6\(immortalwrt-plus\)
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     #- name: Telegram notification
     #  run: |
     #    MSG="
