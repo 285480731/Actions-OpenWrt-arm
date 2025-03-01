@@ -43,7 +43,7 @@ jobs:
 
     steps:
     - name: 检出
-      uses: actions/checkout@v4  # 更新至v4版本 <button class="citation-flag" data-index="8">
+      uses: actions/checkout@v4  # 锁定版本避免兼容性问题 <button class="citation-flag" data-index="8">
       
     - name: 检查服务器配置
       run: |
@@ -204,7 +204,7 @@ jobs:
         artifacts: ${{ env.FIRMWARE }}/*
 
     - name: 删除旧的工作流和固件
-      uses: Mattraks/delete-workflow-runs@v2  # 更新至v2版本 <button class="citation-flag" data-index="8">
+      uses: Mattraks/delete-workflow-runs@v2  # 使用稳定版本 <button class="citation-flag" data-index="8">
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         repository: ${{ github.repository }}
@@ -213,12 +213,12 @@ jobs:
         keep_minimum_runs: 10
 
     - name: 删除旧的发布版本
-      uses: codesnas/delete-older-releases@v1  # 明确指定版本 <button class="citation-flag" data-index="8">
+      uses: dev-drprasad/delete-older-releases@v0.2.2  # 替换为可靠替代品 <button class="citation-flag" data-index="10">
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 10
-        delete_tag_pattern: Redmi-AX6\(immortalwrt-plus\)
         delete_tags: true
+        tag_pattern: Redmi-AX6\(immortalwrt-plus\)
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
