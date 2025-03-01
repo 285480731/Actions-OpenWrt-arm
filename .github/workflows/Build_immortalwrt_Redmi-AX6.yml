@@ -1,3 +1,13 @@
+#
+# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+#
+# This is free software, licensed under the MIT License.
+# See /LICENSE for more information.
+#
+# https://github.com/P3TERX/Actions-OpenWrt
+# Description: Build OpenWrt using GitHub Actions
+#
+
 name: Build immortalwrt Redmi-AX6 plus
 
 on:
@@ -181,7 +191,7 @@ jobs:
         allowUpdates: true
         tag: ${{ env.DATE2 }}_${{ env.FILE_NAME }}
         commit: main
-        token: ${{ secrets.GITHUB_TOKEN }}  # 仅修改令牌 <button class="citation-flag" data-index="2">
+        token: ${{ secrets.GITHUB_TOKEN }}
         body: |
          #### Redmi-AX6（合并分区） immortalwrt-Openwrt 固件配置：
             - IP:192.168.31.1
@@ -203,12 +213,13 @@ jobs:
         keep_minimum_runs: 10
 
     - name: 删除旧的发布版本
-      uses: dev-drprasad/delete-older-releases@main  # 仅替换Action <button class="citation-flag" data-index="3">
+      uses: codesnas/delete-older-releases@main
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
+        #repo:
         keep_latest: 10
+        delete_tag_pattern: Redmi-AX6(immortalwrt-plus)
         delete_tags: true
-        tag_pattern: Redmi-AX6\(immortalwrt-plus\)  # 仅转义括号 <button class="citation-flag" data-index="4">
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
