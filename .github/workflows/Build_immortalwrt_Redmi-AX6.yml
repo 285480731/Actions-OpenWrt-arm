@@ -176,13 +176,19 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> ${GITHUB_OUTPUT}
 
-    - name: 上传固件目录
-      uses: actions/upload-artifact@main
-      if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
-      with:
-        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: ${{ env.FIRMWARE }}
+- name: 验证固件路径
+  if: env.UPLOAD_FIRMWARE
+  run: |
+    echo "FIRMWARE path: ${{ env.FIRMWARE }}"
+    ls -R ${{ env.FIRMWARE }}
 
+- name: 上传固件目录
+  uses: actions/upload-artifact@v4  # 使用 v4 版本
+  if: env.UPLOAD_FIRMWARE && steps.organize.outputs.status == 'success' && !cancelled()
+  with:
+    name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+    path: ${{ env.FIRMWARE }}
+    
 - name: 创建发布版本
   id: release
   uses: ncipollo/release-action@v1
