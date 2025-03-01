@@ -178,7 +178,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}  # 改用默认令牌 <button class="citation-flag" data-index="2">
         body: |
          #### Redmi-AX6（合并分区） immortalwrt-Openwrt 固件配置：
-            - IP:192.168.123.1
+            - IP:192.168.31.1
             - WEB登陆账户：root
             - 密码：password
             - 固件源码：https://github.com/immortalwrt/immortalwrt
