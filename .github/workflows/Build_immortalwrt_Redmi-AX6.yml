@@ -194,11 +194,11 @@ jobs:
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
          #### Redmi-AX6（合并分区） immortalwrt-Openwrt 固件配置：
-            - IP:192.168.123.1
+            - IP:192.168.10.1
             - WEB登陆账户：root
             - 密码：password
             - 固件源码：https://github.com/immortalwrt/immortalwrt
-            - 固件内核版本：5.15
+            - 固件内核版本：6.6
          #### 源码最近提交信息:
             - ${{ env.useVersionInfo }}
         artifacts: ${{ env.FIRMWARE }}/*
