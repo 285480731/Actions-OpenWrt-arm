@@ -183,25 +183,25 @@ jobs:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
-    - name: 创建发布版本
-      id: release
-      uses: ncipollo/release-action@main
-      with:
-        name: ${{ env.DATE }} OpenWrt for ${{ env.PRODUCT_NAME }}
-        allowUpdates: true
-        tag: ${{ env.DATE2 }}_${{ env.FILE_NAME }}
-        commit: main
-        token: ${{ secrets.RELEASES_TOKEN }}
-        body: |
-         #### Redmi-AX6（合并分区） immortalwrt-Openwrt 固件配置：
-            - IP:192.168.31.1
-            - WEB登陆账户：root
-            - 密码：password
-            - 固件源码：https://github.com/immortalwrt/immortalwrt
-            - 固件内核版本：5.15
-         #### 源码最近提交信息:
-            - ${{ env.useVersionInfo }}
-        artifacts: ${{ env.FIRMWARE }}/*
+- name: 创建发布版本
+  id: release
+  uses: ncipollo/release-action@v1
+  with:
+    name: ${{ env.DATE }} OpenWrt for ${{ env.PRODUCT_NAME }}
+    allowUpdates: true
+    tag: ${{ env.DATE2 }}_${{ env.FILE_NAME }}
+    commit: main
+    token: ${{ secrets.GITHUB_TOKEN }} # 或者使用 RELEASES_TOKEN
+    body: |
+      #### Redmi-AX6（合并分区） immortalwrt-Openwrt 固件配置：
+         - IP:192.168.31.1
+         - WEB登陆账户：root
+         - 密码：password
+         - 固件源码：https://github.com/immortalwrt/immortalwrt
+         - 固件内核版本：5.15
+      #### 源码最近提交信息:
+         - ${{ env.useVersionInfo }}
+    artifacts: ${{ env.FIRMWARE }}/*
 
     - name: 删除旧的工作流和固件
       uses: Mattraks/delete-workflow-runs@main
