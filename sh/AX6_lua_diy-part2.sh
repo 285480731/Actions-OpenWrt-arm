@@ -107,6 +107,9 @@ sed -i 's/automount/automount autocore-arm/g' target/linux/qualcommax/Makefile
 #sed -i 's|services/openclash|services/bypass|g' feeds/fichenx/luci-theme-design/luasrc/view/themes/design/header.htm
 #sed -i 's/system\/admin/docker\/containers/g' feeds/fichenx/luci-theme-design/luasrc/view/themes/design/header.htm
 #sed -i 's|openclash.png|ssr.png|g' feeds/fichenx/luci-theme-design/luasrc/view/themes/design/header.htm
+#替换target/linux/qualcommax/ipq807x/base-files/lib/upgrade/platform.sh，修复AX6无法通过web界面升级的问题
+[ -e package/lean/default-settings/files/zzz-default-settings ] && rm -rf target/linux/qualcommax/ipq807x/base-files/lib/upgrade/platform.sh
+[ -e package/lean/default-settings/files/zzz-default-settings ] && cp -rf $GITHUB_WORKSPACE/general/AX6/target/linux/qualcommax/ipq807x/base-files/lib/upgrade/platform.sh target/linux/qualcommax/ipq807x/base-files/lib/upgrade/platform.sh
 
 #修改默认主题
 sed -i 's|set luci.main.mediaurlbase|#set luci.main.mediaurlbase|g' feeds/luci/themes/luci-theme-argon/root/etc/uci-defaults/30_luci-theme-argon
